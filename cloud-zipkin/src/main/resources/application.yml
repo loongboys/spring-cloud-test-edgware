@@ -1,0 +1,13 @@
+#eureka链接配置
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://user:123456@localhost:8761/eureka/
+
+#配置文件端口号与项目名称
+server:
+  port: 8961
+
+spring:
+  application:
+    name: cloud-zipkin

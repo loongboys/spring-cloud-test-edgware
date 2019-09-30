@@ -1,0 +1,6 @@
+swagger:
+  title: API
+  description: 显示API接口文档，方便用户测试
+  version: V1.0
+  basePackage: com
+#  swaggerShow: true

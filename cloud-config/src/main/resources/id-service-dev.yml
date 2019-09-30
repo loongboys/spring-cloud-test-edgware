@@ -1,0 +1,32 @@
+server:
+  port: 8911
+  context-path: /id
+
+spring:
+  zipkin:
+    base-url: http://localhost:8961
+
+#  profiles:
+#    active: dev
+
+#logging:
+#  level:
+#    ROOT: DEBUG
+
+#logging:
+#  level:
+#    org:
+#      springframework:
+#        web: debug
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://user:123456@localhost:8761/eureka
+  instance:
+    prefer-ip-address: true
+    instanceId: ${spring.application.name}:${spring.application.instance_id:${server.port}}
+
+#设置SWAGGER是否展示
+swagger:
+  show: true

@@ -1,0 +1,38 @@
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://user:123456@localhost:8761/eureka/
+server:
+  port: 9097
+spring:
+  application:
+    name: portal-zuul
+  zipkin:
+    base-url: http://localhost:8961
+zuul:
+  routes:
+    ribbon:
+      path: /ribbon/**
+      serviceId: portal-ribbon
+    feign:
+      path: /feign/**
+      serviceId: portal-feign
+
+  host:
+    connect-timeout-millis: 3000
+    socket-timeout-millis: 3000
+
+
+ribbon:
+  ReadTimeout: 3000
+  ConnectTimeout: 3000
+
+
+hystrix:
+    command:
+        default:
+            execution:
+                isolation:
+                    thread:
+                        timeout-in-milliseconds: 3000
+

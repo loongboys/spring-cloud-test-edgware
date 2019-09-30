@@ -1,0 +1,312 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.cloud.parent</groupId>
+    <artifactId>cloud-parent</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+    <name>cloud-parent</name>
+    <description>父项目，用于控制版本</description>
+
+    <modules>
+        <module>../cloud-eureka</module>
+        <module>../cloud-hystrix</module>
+        <module>../cloud-config</module>
+        <module>../cloud-zipkin</module>
+        <module>../common-config</module>
+        <module>../id-service</module>
+        <module>../id-spi</module>
+        <module>../portal-feign</module>
+        <module>../portal-zuul</module>
+        <module>../service-zuul</module>
+        <module>../user-service</module>
+        <module>../user-spi</module>
+    </modules>
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <!--  引入1.5.13版本-->
+        <version>1.5.13.RELEASE</version>
+        <relativePath/> <!-- lookup parent from repository -->
+    </parent>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <java.version>1.8</java.version>
+        <spring-cloud-starter-eureka.version>1.4.4.RELEASE</spring-cloud-starter-eureka.version>
+        <spring-cloud-config.version>1.4.3.RELEASE</spring-cloud-config.version>
+        <spring-cloud-starter-hystrix.version>1.4.4.RELEASE</spring-cloud-starter-hystrix.version>
+        <spring-cloud-starter-feign.version>1.4.4.RELEASE</spring-cloud-starter-feign.version>
+        <spring-cloud-starter-zipkin.version>1.3.3.RELEASE</spring-cloud-starter-zipkin.version>
+        <spring-cloud-starter-zuul.version>1.4.4.RELEASE</spring-cloud-starter-zuul.version>
+
+
+        <spring-boot.version>1.5.13.RELEASE</spring-boot.version>
+
+        <springfox.version>2.7.0</springfox.version>
+
+        <hystrix-javanica.version>1.5.12</hystrix-javanica.version>
+
+        <maven.compiler.source>${java.version}</maven.compiler.source>
+        <maven.compiler.target>${java.version}</maven.compiler.target>
+
+        <zipkin.version>2.6.1</zipkin.version>
+
+        <druid.version>1.1.10</druid.version>
+        <mysql.version>8.0.11</mysql.version>
+
+        <lombok.version>1.16.22</lombok.version>
+        <!-- myself -->
+        <user-spi.version>1.0-SNAPSHOT</user-spi.version>
+        <id-spi.version>1.0-SNAPSHOT</id-spi.version>
+        <common-config.version>1.0-SNAPSHOT</common-config.version>
+        <user-dao.version>1.0-SNAPSHOT</user-dao.version>
+
+
+    </properties>
+
+    <!-- 声明依赖，并不实现引入,因此子项目需要显示的声明需要用的依赖 -->
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>Edgware.SR3</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <!--start eureka -->
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-starter-eureka-server</artifactId>
+                <version>${spring-cloud-starter-eureka.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-starter-eureka</artifactId>
+                <version>${spring-cloud-starter-eureka.version}</version>
+            </dependency>
+            <!--end eureka -->
+
+
+            <!-- start 用于注册中心访问账号认证 -->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-security</artifactId>
+                <version>${spring-boot.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-actuator</artifactId>
+                <version>${spring-boot.version}</version>
+            </dependency>
+            <!--end 用于注册中心访问账号认证 -->
+
+            <!--start zipkin -->
+            <dependency>
+                <groupId>io.zipkin.java</groupId>
+                <artifactId>zipkin-server</artifactId>
+                <version>${zipkin.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.zipkin.java</groupId>
+                <artifactId>zipkin-autoconfigure-ui</artifactId>
+                <version>${zipkin.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-starter-zipkin</artifactId>
+                <version>${spring-cloud-starter-zipkin.version}</version>
+            </dependency>
+            <!--end zipkin -->
+
+
+            <!-- start config -->
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-config-server</artifactId>
+                <version>${spring-cloud-config.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-config</artifactId>
+                <version>${spring-cloud-config.version}</version>
+            </dependency>
+            <!-- end config -->
+
+            <!--start log-->
+            <!--<dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-api</artifactId>
+                <version>${slf4j.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>jcl-over-slf4j</artifactId>
+                <version>${slf4j.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>ch.qos.logback</groupId>
+                <artifactId>logback-access</artifactId>
+                <version>${logback.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>ch.qos.logback</groupId>
+                <artifactId>logback-classic</artifactId>
+                <version>${logback.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>ch.qos.logback</groupId>
+                <artifactId>logback-core</artifactId>
+                <version>${logback.version}</version>
+            </dependency>-->
+            <!--end log-->
+
+            <!--start feign-->
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-starter-feign</artifactId>
+                <version>${spring-cloud-starter-feign.version}</version>
+            </dependency>
+            <!--end feign-->
+
+            <!-- start hystrix -->
+            <dependency>
+                <groupId>com.netflix.hystrix</groupId>
+                <artifactId>hystrix-javanica</artifactId>
+                <version>${hystrix-javanica.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-starter-hystrix-dashboard</artifactId>
+                <version>${spring-cloud-starter-hystrix.version}</version>
+            </dependency>
+            <!-- end hystrix -->
+
+            <!-- start swagger -->
+            <dependency>
+                <groupId>io.springfox</groupId>
+                <artifactId>springfox-swagger-ui</artifactId>
+                <version>${springfox.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.springfox</groupId>
+                <artifactId>springfox-swagger2</artifactId>
+                <version>${springfox.version}</version>
+            </dependency>
+            <!-- end swagger -->
+
+            <!--start 数据库-->
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>druid</artifactId>
+                <version>${druid.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-data-jpa</artifactId>
+                <version>${spring-boot.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>mysql</groupId>
+                <artifactId>mysql-connector-java</artifactId>
+                <version>${mysql.version}</version>
+            </dependency>
+            <!--end 数据库-->
+
+
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>${lombok.version}</version>
+                <scope>provided</scope>
+            </dependency>
+
+
+
+
+            <dependency>
+                <groupId>com.user.spi</groupId>
+                <artifactId>user-spi</artifactId>
+                <version>${user-spi.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.user.dao</groupId>
+                <artifactId>user-dao</artifactId>
+                <version>${user-dao.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.id.spi</groupId>
+                <artifactId>id-spi</artifactId>
+                <version>${id-spi.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.common.config</groupId>
+                <artifactId>common-config</artifactId>
+                <version>${common-config.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+
+    <!-- 引入依赖，父项目不用 -->
+<!--    <dependencies>
+
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+        </dependency>
+        &lt;!&ndash; spring boot test&ndash;&gt;
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>-->
+
+    <build>
+        <defaultGoal>compile</defaultGoal>
+        <finalName>page</finalName>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <configuration>
+                    <skip>true</skip>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+
+    <!-- 自动发布到MAVEN -->
+    <distributionManagement>
+        <repository>
+            <id>releases</id>
+            <name>Nexus Release Repository</name>
+            <url>http://localhost:8081/repository/maven-releases/</url>
+        </repository>
+        <snapshotRepository>
+            <id>snapshots</id>
+            <name>Nexus Snapshot Repository</name>
+            <url>http://localhost:8081/repository/maven-snapshots/</url>
+        </snapshotRepository>
+    </distributionManagement>
+</project>

@@ -1,0 +1,9 @@
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://user:123456@localhost:8761/eureka/
+server:
+  port: 9195
+spring:
+  application:
+    name: cloud-hystrix

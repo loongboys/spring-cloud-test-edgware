@@ -1,0 +1,25 @@
+server:
+  port: 9081 #9181
+  context-path: /user
+spring:
+  zipkin:
+    base-url: http://localhost:8961
+
+  #数据库配置
+  datasource:
+    url: jdbc:mysql://localhost:3306/springboot?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
+    username: root
+    password: root
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://user:123456@localhost:8761/eureka
+  instance:
+    prefer-ip-address: true
+    instanceId: ${spring.application.name}:${spring.application.instance_id:${server.port}}
+    status-page-url-path: /swagger-ui.html
+
+#设置SWAGGER是否显示
+swagger:
+  show: true

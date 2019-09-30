@@ -1,0 +1,47 @@
+#eureka链接配置
+#eureka:
+#  client:
+#    serviceUrl:
+#      defaultZone: http://user:123456@localhost:8761/eureka/
+#  instance:
+#    prefer-ip-address: true
+#    instanceId: ${spring.application.name}:${spring.application.instance_id:${server.port}}
+
+#配置文件端口号与项目名称
+server:
+  port: 8861
+
+spring:
+  application:
+    name: cloud-config
+  #本地化http://localhost:8861/test/dev
+  profiles:
+    active: native
+  #指定多环境配置文件位置，默认在resources下
+#  cloud:
+#    config:
+#      server:
+#        native:
+#          search-locations: classpath:/properties/
+
+
+#配置文件GITLAB化,前置远程仓库https://github.com/forezp/SpringcloudConfig/ 中有个文件config-client-dev.properties文件中有一个属性（foo = foo version 3），访问：http://localhost:8888/foo/dev
+#得到{"name":"foo","profiles":["dev"],"label":"master","version":"792ffc77c03f4b138d28e89b576900ac5e01a44b","state":null,"propertySources":[]}
+#http请求地址和资源文件映射如下:
+# •/{application}/{profile}[/{label}]
+# •/{application}-{profile}.yml
+# •/{label}/{application}-{profile}.yml
+# •/{application}-{profile}.properties
+# •/{label}/{application}-{profile}.properties
+############
+#spring:
+#  cloud:
+#    config:
+#      label: master
+#      server:
+#        git:
+#          uri: https://github.com/forezp/SpringcloudConfig/
+#          searchPaths: respo
+#          username: your username
+#          password: your password
+################

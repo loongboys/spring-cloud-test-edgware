@@ -1,0 +1,10 @@
+spring:
+#  application:
+#    name: user-service
+  #本地化http://localhost:8861/user-service/dev
+  cloud:
+      #配置服务器
+      config:
+        uri: http://localhost:${config.port:8861}
+        name: user-service                  #配置名称
+        profile: dev                       #最后定向到文件：user-service-dev.[properties|yml|

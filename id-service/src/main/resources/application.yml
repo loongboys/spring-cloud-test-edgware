@@ -1,0 +1,14 @@
+
+spring:
+  application:
+    name: id-service
+
+#设置SWAGGER
+swagger:
+  title: ID生成中心
+  description: 单机每秒可产生26万个ID,可以通过机器码进行区分
+  version: V1.0
+  basePackage: com.id.service
+
+
+

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>cloud-parent</artifactId>
+        <groupId>com.cloud.parent</groupId>
+        <version>1.0-SNAPSHOT</version>
+        <relativePath>../cloud-parent/pom.xml</relativePath>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.cloud.eureka</groupId>
+    <artifactId>cloud-eureka</artifactId>
+    <name>cloud-eureka</name>
+    <description>服务注册中心</description>
+
+    <!--<dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>-->
+
+    <dependencies>
+
+        <!-- eureka服务器 -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-eureka-server</artifactId>
+        </dependency>
+
+        <!-- 用于注册中心访问账号认证 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
+
+    </dependencies>
+
+</project>

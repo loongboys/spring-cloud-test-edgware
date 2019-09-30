@@ -1,0 +1,14 @@
+
+#设置id-service机器码，部署多个时保证这两个值不同
+id-service:
+  workerId: 1
+  datacenterId: 1
+
+spring:
+  #本地化http://localhost:8861/id-service/dev
+  cloud:
+      #配置服务器
+      config:
+        uri: http://localhost:${config.port:8861}
+        name: id-service                  #配置名称
+        profile: dev                       #最后定向到文件：application-dev.[properties|yml|
